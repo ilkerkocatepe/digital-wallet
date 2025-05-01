@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%green(%date) %highlight(%-5level) %yellow([%-4relative]) %magenta([%thread]) %cyan(%logger{10}) %gray([%file:%line]) [traceId:%X{traceId:-}, spanId:%X{spanId:-}] %gray(: %msg%n)</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="com.logging.springboot2graylog">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+</configuration>

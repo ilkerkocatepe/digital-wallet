@@ -1,0 +1,60 @@
+server:
+  port: 8080
+  shutdown: graceful
+spring:
+  application:
+    name: digital-wallet
+  datasource:
+    url: jdbc:h2:mem:digitalwallet;MODE=PostgreSQL;AUTO_RECONNECT=TRUE
+    driver-class-name: org.h2.Driver
+    username: digitalwallet
+    password: digitalwallet
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+  jmx:
+    enabled: true
+  security:
+    user:
+      password: password
+
+## LOGGING
+logging:
+  config: classpath:logback.xml
+## API DOCUMENTATION
+application:
+  version: ^project.version^
+com:
+  name: Digital Wallet Project
+  email: kocatepeilker@gmail.com
+  api:
+    host: http://localhost:8080
+    doc:
+      title: ${com.name}
+      description: ${com.name} API Documentation
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: swagger-ui.html
+    displayRequestDuration: true
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+
+## MONITORING
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-components: always
+  tracing:
+    sampling:
+      probability: 1.0
+
