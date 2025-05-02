@@ -1,8 +1,9 @@
 services:
   digital-wallet:
+    container_name: digital-wallet
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: .dockerize/Dockerfile
     healthcheck:
       test: "curl --fail --silent localhost:8080/healthcheck | grep OK || exit 1"
       interval: 20s

@@ -3,11 +3,13 @@ package dev.ilkerk.digitalwallet.config;
 import dev.ilkerk.digitalwallet.adapter.persistence.CustomerRepository;
 import dev.ilkerk.digitalwallet.domain.entity.Customer;
 import dev.ilkerk.digitalwallet.domain.entity.Role;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Slf4j
 public class DataInitializer {
 
     @Bean
@@ -25,7 +27,7 @@ public class DataInitializer {
                         .build();
 
                 customerRepository.save(testCustomer);
-                System.out.println("✔ Test customer created: " + tckn);
+                log.info("✔ Test customer created: {}", tckn);
             }
         };
     }
