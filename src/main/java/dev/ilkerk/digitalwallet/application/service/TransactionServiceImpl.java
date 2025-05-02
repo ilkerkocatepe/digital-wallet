@@ -19,7 +19,6 @@ import java.util.List;
 public class TransactionServiceImpl implements TransactionService {
     private static final int AUTO_APPROVE_LIMIT = 1000;
     private final TransactionRepository transactionRepository;
-    private final WalletService walletService;
     private final SecurityAccessValidator securityAccessValidator;
 
     @Override
@@ -37,8 +36,6 @@ public class TransactionServiceImpl implements TransactionService {
         } else {
             wallet.setBalance(wallet.getBalance().add(amount));
         }
-
-        wallet = walletService.updateWallet(wallet);
 
         Transaction tx = Transaction.builder()
                 .wallet(wallet)
@@ -77,8 +74,6 @@ public class TransactionServiceImpl implements TransactionService {
         } else {
             wallet.setUsableBalance(wallet.getUsableBalance().subtract(amount));
         }
-
-        wallet = walletService.updateWallet(wallet);
 
         Transaction tx = Transaction.builder()
                 .wallet(wallet)

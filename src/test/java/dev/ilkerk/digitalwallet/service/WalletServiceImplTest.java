@@ -160,7 +160,7 @@ class WalletServiceImplTest {
     @Test
     void getWalletById_shouldReturnWalletWhenExists() {
         // Arrange
-        when(walletRepository.findById(1L)).thenReturn(Optional.of(wallet1));
+        when(walletRepository.findByIdForUpdate(1L)).thenReturn(Optional.of(wallet1));
 
         // Act
         Wallet result = walletService.getWalletById(1L);
@@ -170,19 +170,19 @@ class WalletServiceImplTest {
         assertEquals(wallet1, result);
         assertEquals(1L, result.getId());
 
-        verify(walletRepository, times(1)).findById(1L);
+        verify(walletRepository, times(1)).findByIdForUpdate(1L);
     }
 
     @Test
     void getWalletById_shouldThrowException_whenWalletNotFound() {
         // Arrange
-        when(walletRepository.findById(999L)).thenReturn(Optional.empty());
+        when(walletRepository.findByIdForUpdate(999L)).thenReturn(Optional.empty());
 
         // Act & Assert
         Exception exception = assertThrows(RuntimeException.class, () -> walletService.getWalletById(999L));
 
         assertEquals("Wallet not found", exception.getMessage());
-        verify(walletRepository, times(1)).findById(999L);
+        verify(walletRepository, times(1)).findByIdForUpdate(999L);
     }
 
     @Test
